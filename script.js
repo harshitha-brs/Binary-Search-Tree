@@ -57,3 +57,29 @@ document.getElementById("submit").addEventListener("click", function() {
   const output = isValidBST(root);
   document.getElementById("output").innerHTML = output ? "true" : "false";
 });
+
+document
+  .getElementById("intervalsInput")
+  .addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleValidityCheck();
+    }
+  });
+
+function handleValidityCheck() {
+  const input = document.getElementById("intervalsInput").value;
+  const values = JSON.parse(input);
+  let root = null;
+  values.forEach(val => {
+    root = insertNode(root, val);
+  });
+
+  const output = isValidBST(root);
+  document.getElementById("output").innerHTML = output ? "true" : "false";
+}
+
+// Optional: Trigger the validity check function even without clicking submit button
+document.addEventListener("DOMContentLoaded", function() {
+  handleValidityCheck();
+});
